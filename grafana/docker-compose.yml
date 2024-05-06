@@ -82,6 +82,17 @@ services:
       - influxData:/var/lib/influxdb
     networks: 
       - grafana
+
+  mosquitto: 
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: unless-stopped
+    ports: 
+      - 9001:9001
+    volumes:
+      - /var/lib/docker/root_dir/grafana/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - grafana
       
 networks:
   grafana:
